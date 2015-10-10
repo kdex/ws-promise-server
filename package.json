@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "A tiny subprotocol on top of WebSockets allowing JavaScript request-response usage",
   "main": "src/index.js",
-  "format": "es6",
   "files": [
     "src/*",
-    "dist/*"
+    "dist/**/*"
   ],
   "registry": "npm",
   "scripts": {
@@ -29,9 +28,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "jspm": {
-    "main": "dist/system/index.js",
-    "files": [
-      "dist/system"
-    ]
+    "format": "cjs",
+    "main": "dist/common/index.js"
   }
 }
