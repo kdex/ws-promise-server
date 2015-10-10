@@ -2,10 +2,11 @@
   "name": "ws-promise-server",
   "version": "1.0.0",
   "description": "A tiny subprotocol on top of WebSockets allowing JavaScript request-response usage",
-  "main": "dist/common/index.js",
-  "format": "common",
+  "main": "src/index.js",
+  "format": "es6",
   "files": [
-    "dist/common"
+    "src/*",
+    "dist/*"
   ],
   "registry": "npm",
   "scripts": {
@@ -14,6 +15,7 @@
   "author": "kdex",
   "license": "GPL-3.0",
   "dependencies": {
+    "event-emitter": "github:kdex/event-emitter",
     "ws": "^0.8.0"
   },
   "devDependencies": {

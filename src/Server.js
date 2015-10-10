@@ -1,4 +1,4 @@
-import EventEmitter from "./EventEmitter.js";
+import EventEmitter from "event-emitter";
 import ServerClient from "./ServerClient.js";
 let WebSocket = require("ws");
 export class Server extends EventEmitter {
