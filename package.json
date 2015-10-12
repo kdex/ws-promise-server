@@ -14,7 +14,7 @@
   "author": "kdex",
   "license": "GPL-3.0",
   "dependencies": {
-    "event-emitter": "github:kdex/event-emitter",
+    "event-emitter": "kdex/event-emitter",
     "ws": "^0.8.0"
   },
   "devDependencies": {
