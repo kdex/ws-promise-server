@@ -1,5 +1,5 @@
 import WebSocket from "ws";
-import EventEmitter from "event-emitter";
+import EventEmitter from "crystal-event-emitter";
 export class ServerClient extends EventEmitter {
 	constructor(ws) {
 		super();
