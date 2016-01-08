@@ -27,8 +27,8 @@
   "author": "kdex",
   "license": "GPL-3.0",
   "dependencies": {
-    "crystal-event-emitter": "^1.0.2",
-    "ws": "^0.8.0"
+    "crystal-event-emitter": "^1.1.0",
+    "ws": "^1.0.1"
   },
   "devDependencies": {
     "babel-plugin-transform-es2015-modules-umd": "^6.4.0",
@@ -36,6 +36,6 @@
     "babel-preset-stage-0": "^6.3.13",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.1",
-    "gulp-uglify": "^1.4.1"
+    "gulp-uglify": "^1.5.1"
   }
 }
