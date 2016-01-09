@@ -2,7 +2,9 @@ import WebSocket from "ws";
 import EventEmitter from "crystal-event-emitter";
 export class ServerClient extends EventEmitter {
 	constructor(ws) {
-		super();
+		super({
+			inferListeners: true
+		});
 		this.ws = ws;
 		let that = this;
 		for (let event of ["close", "error", "message", "open"]) {
