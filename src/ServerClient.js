@@ -34,7 +34,6 @@ export class ServerClient extends EventEmitter {
 					}
 					else {
 						let isFinished = finish || autoFinish;
-						console.log(isFinished);
 						this.send({
 							message,
 							body,
