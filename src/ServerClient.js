@@ -8,7 +8,8 @@ export class ServerClient extends EventEmitter {
 			inferListeners: true
 		});
 		this.ws = ws;
-		this.isFinished = false;
+		/* TODO: Is there a solution that doesn't require this set, but without continuous integers? */
+		this.finished = new Set();
 		for (let event of ["close", "error", "message", "open"]) {
 			let name = `on${event}`;
 			this.ws[name] = e => {
@@ -29,8 +30,8 @@ export class ServerClient extends EventEmitter {
 					body = null;
 				}
 				let replyToMessage = (body, finish = false) => {
-					if (this.isFinished) {
-						throw new Error("Unable to finish message: Message has already been finished.");
+					if (this.finished.has(message)) {
+						throw new Error("Unable to reply: Message has already been finished.");
 					}
 					else {
 						let isFinished = finish || autoFinish;
@@ -39,7 +40,9 @@ export class ServerClient extends EventEmitter {
 							body,
 							isFinished: finish || autoFinish
 						});
-						this.isFinished = isFinished;
+						if (isFinished) {
+							this.finished.add(message);
+						}
 					}
 				}
 				this.emit(event, {
