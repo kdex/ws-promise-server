@@ -45,7 +45,7 @@ export class ServerClient extends EventEmitter {
 						}
 					}
 				}
-				for (let notification of [event, payload.message]) {
+				for (let notification of [event, message]) {
 					this.emit(notification, {
 						payload,
 						body,
@@ -61,14 +61,13 @@ export class ServerClient extends EventEmitter {
 		}
 	}
 	send(body) {
-		if (body && body.message) {
-			return new Promise((resolve, reject) => {
+		return new Promise((resolve, reject) => {
 				this.on(body.message, e => {
 					resolve(e);
 				});
 				this.ws.send(JSON.stringify(body));
-			});
-		}
+			}
+		});
 	}
 }
 export default ServerClient;
