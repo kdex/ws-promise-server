@@ -45,24 +45,28 @@ export class ServerClient extends EventEmitter {
 						}
 					}
 				}
-				if (body && body.isReply) {
-					replyToMessage({});
+				for (let notification of [event, payload.message]) {
+					this.emit(notification, {
+						payload,
+						body,
+						message,
+						event: e,
+						reply: body => replyToMessage(body),
+						finish: body => {
+							replyToMessage(body, true);
+						}
+					});
 				}
-				this.emit(event, {
-					payload,
-					body,
-					message,
-					event: e,
-					reply: body => replyToMessage(body),
-					finish: body => {
-						replyToMessage(body, true);
-					}
-				});
 			};
 		}
 	}
 	send(body) {
-		this.ws.send(JSON.stringify(body));
+		return new Promise((resolve, reject) => {
+			this.on(body.message, e => {
+				resolve(e);
+			});
+			this.ws.send(JSON.stringify(body));
+		});
 	}
 }
 export default ServerClient;
