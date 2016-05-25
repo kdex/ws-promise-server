@@ -45,6 +45,9 @@ export class ServerClient extends EventEmitter {
 						}
 					}
 				}
+				if (body && body.isReply) {
+					replyToMessage({});
+				}
 				this.emit(event, {
 					payload,
 					body,
