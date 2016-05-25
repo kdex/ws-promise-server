@@ -62,11 +62,10 @@ export class ServerClient extends EventEmitter {
 	}
 	send(body) {
 		return new Promise((resolve, reject) => {
-				this.on(body.message, e => {
+			this.on(body.message, e => {
 					resolve(e);
-				});
-				this.ws.send(JSON.stringify(body));
-			}
+			});
+			this.ws.send(JSON.stringify(body));
 		});
 	}
 }
