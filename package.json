@@ -1,6 +1,6 @@
 {
   "name": "ws-promise-server",
-  "version": "1.2.7",
+  "version": "2.0.0",
   "description": "A tiny subprotocol on top of WebSockets allowing JavaScript request-response usage",
   "main": "dist/index.js",
   "files": [
