@@ -28,7 +28,8 @@
   "license": "GPL-3.0",
   "dependencies": {
     "crystal-event-emitter": "^1.1.2",
-    "ws": "^1.0.1"
+    "ws": "^1.0.1",
+    "ws-rpc-client": "^1.0.0"
   },
   "devDependencies": {
     "babel-plugin-transform-es2015-modules-umd": "^6.4.0",
