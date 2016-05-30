@@ -9,7 +9,7 @@ export class Server extends EventEmitter {
 		this.wss = new WebSocketServer(options);
 		for (let event of ["error", "headers", "connection"]) {
 			this.wss.on(event, ws => {
-				const client = new RPCClient(ws);
+				const client = new RPCClient(ws, options.rpcOptions);
 				this.emit(event, client);
 			});
 		}
