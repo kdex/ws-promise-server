@@ -13,5 +13,6 @@ export class Server extends EventEmitter {
 				this.emit(event, client);
 			});
 		}
-	}}
+	}
+}
 export default Server;
