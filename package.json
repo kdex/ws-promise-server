@@ -1,6 +1,6 @@
 {
   "name": "ws-promise-server",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "A tiny subprotocol on top of WebSockets allowing JavaScript request-response usage",
   "main": "dist/index.js",
   "files": [
@@ -30,7 +30,7 @@
     "babel-runtime": "^6.9.2",
     "crystal-event-emitter": "^1.2.1",
     "ws": "^1.1.1",
-    "ws-rpc-client": "^2.0.1"
+    "ws-rpc-client": "^2.1.0"
   },
   "devDependencies": {
     "babel-plugin-transform-es2015-modules-umd": "^6.8.0",
