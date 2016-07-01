@@ -10,14 +10,14 @@ export class Server extends EventEmitter {
 			inferListeners: true
 		});
 		this.wss = new WebSocketServer(options);
-		for (let event of ["error", "headers"]) {
+		for (const event of ["error", "headers"]) {
 			/* Forward some original events */
 			this.wss.on(event, ws => this.emit(ws));
 		}
 		this.wss.on("connection", ws => {
 			/* Forward connection events with RPCClients */
 			const client = new RPCClient(ws, options.rpcOptions);
-			this.emit(event, client);
+			this.emit("connection", client);
 			/* Forward RPCClient events */
 			client.on(ANY, e => {
 				this.emit(e);
