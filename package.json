@@ -4,7 +4,6 @@
   "description": "A tiny subprotocol on top of WebSockets allowing JavaScript request-response usage",
   "main": "dist/index.js",
   "files": [
-    "src/*",
     "dist/*"
   ],
   "registry": "npm",
