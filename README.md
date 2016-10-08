@@ -12,9 +12,9 @@ import WS from "ws-promise-server";
 const server = new WS({
 	port: 8080
 });
-server.on("connection", client => {
-	client.on("message", message => {
-		message.reply("You can reply to messages!");
+server.on("connection", rpc => {
+	rpc.on("sayHello", message => {
+		message.reply("Hello, client!");
 	});
 });
 ```
