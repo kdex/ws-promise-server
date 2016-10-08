@@ -13,8 +13,15 @@ const server = new WS({
 	port: 8080
 });
 server.on("connection", rpc => {
-	rpc.on("sayHello", message => {
-		message.reply("Hello, client!");
+	rpc.on("computePrimes", async message => {
+		try {
+			const primes = await computePrimes();
+			await message.reply(...primes);
+			/* In this line, the client will have received the reply */
+		}
+		catch (e) {
+			/* In this line, the client might have disconnected */
+		}
 	});
 });
 ```
