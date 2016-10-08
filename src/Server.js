@@ -3,7 +3,7 @@ import {
 	ANY
 } from "crystal-event-emitter";
 import RPCClient from "ws-rpc-client";
-import { Server as WebSocketServer } from "ws";
+import { Server as WebSocketServer } from "uws";
 export class Server extends EventEmitter {
 	constructor(options) {
 		super({
