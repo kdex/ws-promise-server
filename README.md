@@ -3,7 +3,7 @@
 
 The WebSocket implementation used by this project is [uWebSockets](https://github.com/uWebSockets/uWebSockets), since it outperforms all current implementations. The official client to use with this server is available at [kdex/ws-promise-client](https://github.com/kdex/ws-promise-client).
 
-The protocol that servers and clients carry out is [a minimal RPC protocol](https://github.com/kdex/ws-rpc-client).
+The protocol that servers and clients carry out is [kdex/ws-rpc-client](https://github.com/kdex/ws-rpc-client), a minimal RPC protocol.
 
 # Getting started
 The following code creates a server and allows you to reply to a *specific* message sent by a client without you needing to put any kind of message ID anywhere.
