@@ -4,8 +4,21 @@ import * as exports from "../src/index";
 import Client from "ws-promise-client";
 const { Server } = exports;
 const port = 1234;
-const server = new Server({
-	port
+let index = 0;
+test.beforeEach(async t => {
+	t.context.environment = (index => ({
+		server: new Server({
+			port: port + index
+		}),
+		makeClient() {
+			return new Client(`ws://localhost:${port + index}`);
+		}
+	}))(index);
+	++index;
+	await t.context.environment.server.open();
+});
+test.afterEach.always(async t => {
+	await t.context.environment.server.close();
 });
 function limit(promise) {
 	const fail = new Promise((resolve, reject) => {
@@ -14,9 +27,6 @@ function limit(promise) {
 		}, 5000);
 	})
 	return Promise.race([promise, fail]);
-}
-function makeClient() {
-	return new Client(`ws://localhost:${port}`);
 }
 test("There is both a default as well as a named export", t => {
 	t.plan(1);
@@ -33,8 +43,9 @@ test("There is both a default as well as a named export", t => {
 		t.pass();
 	}
 });
-test.serial("One client can connect to the server", async t => {
+test("One client can connect to the server", async t => {
 	t.plan(1);
+	const { environment: { server, makeClient }} = t.context;
 	try {
 		await limit(new Promise(async (resolve, reject) => {
 			server.on("connection", () => {
@@ -49,9 +60,10 @@ test.serial("One client can connect to the server", async t => {
 		t.fail();
 	}
 });
-test.serial("Many clients can connect to the server", async t => {
+test("Many clients can connect to the server", async t => {
 	const clientAmount = 100;
 	t.plan(clientAmount + 1);
+	const { environment: { server, makeClient }} = t.context;
 	try {
 		await limit(new Promise(async (resolve, reject) => {
 			server.on("connection", () => {
@@ -70,8 +82,9 @@ test.serial("Many clients can connect to the server", async t => {
 		t.fail();
 	}
 });
-test.serial("The server can receive data from one client", async t => {
+test("The server can receive data from one client", async t => {
 	t.plan(1);
+	const { environment: { server, makeClient }} = t.context;
 	try {
 		await limit(new Promise(async (resolve, reject) => {
 			server.on("connection", rpc => {
@@ -98,8 +111,9 @@ test.serial("The server can receive data from one client", async t => {
 		t.fail();
 	}
 });
-test.serial("A single endpoint argument is transformed into an endpoint iterable", async t => {
+test("A single endpoint argument is transformed into an endpoint iterable", async t => {
 	t.plan(1);
+	const { environment: { server, makeClient }} = t.context;
 	try {
 		await limit(new Promise(async (resolve, reject) => {
 			server.on("connection", rpc => {
@@ -126,8 +140,9 @@ test.serial("A single endpoint argument is transformed into an endpoint iterable
 		t.fail();
 	}
 });
-test.serial("The server can reply to a client", async t => {
+test("The server can reply to a client", async t => {
 	t.plan(1);
+	const { environment: { server, makeClient }} = t.context;
 	try {
 		await limit(new Promise(async (resolve, reject) => {
 			server.on("connection", rpc => {
@@ -151,6 +166,27 @@ test.serial("The server can reply to a client", async t => {
 			if (replyA !== "two" || replyB !== "replies") {
 				t.fail();
 			}
+		}));
+		t.pass();
+	}
+	catch (e) {
+		t.fail();
+	}
+});
+test("Port is available once `close` is finished", async t => {
+	t.plan(1);
+	try {
+		await limit(new Promise(async (resolve, reject) => {
+			const server1 = new Server({
+				port: 1200
+			});
+			await server1.open();
+			await server1.close();
+			const server2 = new Server({
+				port: 1200
+			});
+			await server2.open();
+			resolve();
 		}));
 		t.pass();
 	}
