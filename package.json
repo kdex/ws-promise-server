@@ -1,7 +1,7 @@
 {
   "name": "ws-promise-server",
   "version": "3.0.2",
-  "description": "A tiny subprotocol on top of WebSockets allowing JavaScript request-response usage",
+  "description": "A tiny subprotocol on top of WebSockets allowing request-response usage in ECMAScript",
   "main": "dist/index.js",
   "files": [
     "dist/*"
