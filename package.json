@@ -33,7 +33,7 @@
     "babel-runtime": "^6.11.6",
     "crystal-event-emitter": "^1.3.1",
     "ws": "^1.1.1",
-    "ws-rpc-client": "^2.1.6"
+    "ws-rpc-client": "^2.1.7"
   },
   "devDependencies": {
     "ava": "^0.16.0",
@@ -45,7 +45,7 @@
     "gulp-ava": "^0.14.1",
     "gulp-babel": "^6.1.2",
     "gulp-uglify": "^2.0.0",
-    "ws-promise-client": "^4.1.4"
+    "ws-promise-client": "^4.1.5"
   },
   "ava": {
     "babel": "inherit",
