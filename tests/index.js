@@ -1,7 +1,7 @@
 import "babel-register";
 import test from "ava";
 import * as exports from "../src/index";
-import Client from "ws-promise-client";
+import Client, { ANY } from "ws-promise-client";
 const { Server } = exports;
 const port = 1234;
 let index = 0;
@@ -149,6 +149,39 @@ test("The server can reply to a client", async t => {
 				rpc.on("message", async message => {
 					try {
 						await message.data.reply("two", "replies");
+						resolve();
+					}
+					catch (e) {
+						console.log(e);
+						reject();
+					}
+				});
+			});
+			const client = makeClient();
+			await client.open();
+			const reply = await client.send({
+				instruction: "question"
+			});
+			const [replyA, replyB] = reply.payload.args;
+			if (replyA !== "two" || replyB !== "replies") {
+				t.fail();
+			}
+		}));
+		t.pass();
+	}
+	catch (e) {
+		t.fail();
+	}
+});
+test("The server can reply to a client using a specialized event", async t => {
+	t.plan(1);
+	const { environment: { server, makeClient }} = t.context;
+	try {
+		await limit(new Promise(async (resolve, reject) => {
+			server.on("connection", rpc => {
+				rpc.on("question", async message => {
+					try {
+						await message.reply("two", "replies");
 						resolve();
 					}
 					catch (e) {
