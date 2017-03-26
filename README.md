@@ -1,3 +1,6 @@
+# Project moved
+This project has moved [here](https://github.com/kdex/ws-promise). This repository is deprecated.
+
 # ws-promise-server
 `ws-promise-server` is a tiny framework that builds a request-response model onto HTML5 WebSockets using ES2015 Promises. You can use this with ES2017's `await`/`async` to simplify your WebSocket API.
 
