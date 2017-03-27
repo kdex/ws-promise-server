@@ -32,10 +32,13 @@ const server = new WS({
 })();
 ```
 # API reference
+
 #### WS.constructor(options)
 Constructs a new `ws-promise-server` instance. The `options` argument will be passed to the constructor of [`ws`](https://www.npmjs.com/package/ws) once you open the connection.
+
 #### async WS.prototype.open()
 Starts listening. The entire `options` object will be passed to the constructor of [`ws`](https://www.npmjs.com/package/ws). Once the server is listening, the `Promise` will resolve. If there is an error, the `Promise` will reject.
+
 #### async WS.prototype.close()
 Closes the server by disconnecting all clients and closing the TCP socket. Once the port is free for use again, the `Promise` will resolve. If there is an error while closing, the `Promise` will reject.
 
